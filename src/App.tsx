@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import { Alert, Container, Button, Spinner } from 'react-bootstrap'
 import Camera from './components/Camera'
@@ -17,14 +17,6 @@ const Main = (): JSX.Element => {
     console.error('camera error', error)
     setError(error)
   }
-
-  useEffect(() => {
-    if (result?.valid === true) {
-      console.log('ding')
-    } else if (result?.valid === false) {
-      console.log('boop')
-    }
-  }, [result])
 
   if (error !== null) {
     return (
