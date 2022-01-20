@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import QrReader from 'react-qr-reader'
 
 interface CameraProps {
@@ -7,12 +7,9 @@ interface CameraProps {
 }
 
 const Camera = ({ onScan, onError }: CameraProps): JSX.Element => {
-  const [data, setData] = useState<string | null>(null)
-
   const handleScan = (newData: string | null): void => {
-    if (newData !== null && newData !== data) {
+    if (newData !== null) {
       onScan(newData)
-      setData(newData)
     }
   }
 
