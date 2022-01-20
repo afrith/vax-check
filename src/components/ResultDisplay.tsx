@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { CheckCircleFill, XCircleFill, QuestionCircleFill } from 'react-bootstrap-icons'
 import { VerifyResult, VerificationError } from 'verify-za-vaccine-cert'
 
 const vaxNames: Record<string, string> = {
@@ -8,6 +9,20 @@ const vaxNames: Record<string, string> = {
 }
 
 const basicError = <>That is <span className='fw-bold text-danger'>not</span> a valid COVID-19 vaccination certificate.</>
+
+const validIcon = <CheckCircleFill className='text-success' />
+const invalidIcon = <XCircleFill className='text-danger' />
+const unsureIcon = <QuestionCircleFill className='text-warning' />
+
+const errorMarks: Record<VerificationError, JSX.Element> = {
+  [VerificationError.InvalidJson]: invalidIcon,
+  [VerificationError.MissingField]: invalidIcon,
+  [VerificationError.InvalidHash]: invalidIcon,
+  [VerificationError.CertFormat]: invalidIcon,
+  [VerificationError.ApiBadResponse]: unsureIcon,
+  [VerificationError.ApiBadJson]: unsureIcon,
+  [VerificationError.ApiNotValid]: invalidIcon
+}
 
 const errorMessages: Record<VerificationError, JSX.Element> = {
   [VerificationError.InvalidJson]: basicError,
@@ -24,9 +39,14 @@ const ResultDisplay = ({ result }: { result: VerifyResult }): JSX.Element => {
     const { cert } = result
     return (
       <div className='fs-4'>
-        That is a <span className='fw-bold text-success'>valid</span> South
-        African COVID-19 vaccine certificate.
         <Container className='mt-2'>
+          <Row>
+            <Col xs={1}>{validIcon}</Col>
+            <Col>
+              That is a <span className='fw-bold text-success'>valid</span> South
+              African COVID-19 vaccine certificate.
+            </Col>
+          </Row>
           <Row>
             <Col xs={5} className='fw-bold'>Name:</Col>
             <Col>{cert.firstName} {cert.surname}</Col>
@@ -50,7 +70,12 @@ const ResultDisplay = ({ result }: { result: VerifyResult }): JSX.Element => {
   } else {
     return (
       <div className='fs-4'>
-        {errorMessages[result.reason]}
+        <Container className='mt-2'>
+          <Row>
+            <Col xs={1}>{errorMarks[result.reason]}</Col>
+            <Col>{errorMessages[result.reason]}</Col>
+          </Row>
+        </Container>
       </div>
     )
   }
