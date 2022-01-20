@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './App.css'
 import { Alert, Container, Button, Spinner } from 'react-bootstrap'
+import { QrCodeScan } from 'react-bootstrap-icons'
 import Camera from './components/Camera'
 import useVerifyCert from './components/useVerifyCert'
 import ResultDisplay from './components/ResultDisplay'
@@ -49,7 +50,7 @@ const Main = (): JSX.Element => {
     return (
       <>
         <ResultDisplay result={result} />
-        <Button variant='primary' className='my-3 py-3 w-100' onClick={(): void => { setQrcode(null) }}>Scan again</Button>
+        <Button variant='primary' className='my-3 py-3 w-100' onClick={(): void => { setQrcode(null) }}><QrCodeScan /> Scan again</Button>
       </>
     )
   }
