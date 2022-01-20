@@ -64,12 +64,14 @@ const Main = (): JSX.Element => {
 }
 
 const App = (): JSX.Element => (
-  <Container className='mt-4 mb-8 narrow'>
-    <Main />
-    <div className='fixed-bottom m-2 fst-italic'>
-      This site is run by <a href='https://adrian.frith.dev/'>Adrian Frith</a>.
-      It is not affiliated with the Department of Health.
-      It does not store any of the information from scanned certificates.
+  <Container className='my-4 narrow'>
+    <div style={{ paddingBottom: 50 }}><Main /></div>
+    <div className='fixed-bottom p-2 fst-italic' style={{ backgroundColor: 'white' }}>
+      <small>
+        This site is run by <a href='https://adrian.frith.dev/'>Adrian Frith</a>.
+        It is not affiliated with the Department of Health.
+        It does not retain any information from scanned certificates.
+      </small>
     </div>
   </Container>
 )
