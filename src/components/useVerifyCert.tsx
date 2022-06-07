@@ -12,7 +12,7 @@ const useVerifyCert = (qrcode: string | null): { loading: boolean, result: any }
       const doVerify = async (): Promise<void> => {
         try {
           const result = await verifyCert(qrcode, {
-            endpointUrl: '/ms/rs/verification/verify2_0/'
+            endpointUrl: 'https://lrwt8ix8v0.execute-api.af-south-1.amazonaws.com/prod'
           })
           setResult(result)
         } catch (err) {
